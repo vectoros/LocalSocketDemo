@@ -21,6 +21,8 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
+             socket_local_client_unix.c
+             socket_local_unix.c
              native-lib.cpp )
 
 # Searches for a specified prebuilt library and stores the path as a

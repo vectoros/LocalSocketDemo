@@ -3,6 +3,8 @@ package com.vectoros.localsocketdemo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -11,6 +13,24 @@ public class MainActivity extends AppCompatActivity {
     static {
         System.loadLibrary("native-lib");
     }
+    private Button start, stop, quit;
+
+    private View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.start:
+                    serverCommand(1);
+                    break;
+                case R.id.stop:
+                    serverCommand(2);
+                    break;
+                case R.id.quit:
+                    serverCommand(0);
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +38,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Example of a call to a native method
-        TextView tv = findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        start = findViewById(R.id.start);
+        stop = findViewById(R.id.stop);
+        quit = findViewById(R.id.quit);
+        start.setOnClickListener(clickListener);
+        stop.setOnClickListener(clickListener);
+        quit.setOnClickListener(clickListener);
     }
 
     @Override
